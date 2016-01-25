@@ -35,6 +35,8 @@ mysql -uroot -proot -e "CREATE DATABASE IF NOT EXISTS drupal8"
 
 
 # Apache / Virtual Host Setup
+rm /etc/apache2/envvars
+cp /vagrant/apache-envvars /etc/apache2/envvars
 echo "----- Provision: Install Host File..."
 cp /vagrant/hostfile /etc/apache2/sites-available/drupal8.conf
 a2ensite drupal8.conf > /dev/null

@@ -30,7 +30,10 @@ Open a browser and go to `http://drupal8.local`. You should see the Drupal8 Inst
 **database user:** root  
 **database password:** root  
 
-You can edit the site files from your regular (host) filesystem in the `docroot` folder.  
+You can edit the site files from your regular (host) filesystem in the `docroot` folder. You can also ssh into the vm with `vagrant ssh` and run commands there. Drupal Console is installed and looks pretty neat:  
+https://drupalconsole.com/docs/english  
+
+
 When you are done working and want to shut down the vm - go into the `/vagrant` folder and type  
 ```
 vagrant halt

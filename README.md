@@ -30,7 +30,20 @@ Open a browser and go to `http://drupal8.local`. You should see the Drupal8 Inst
 **database user:** root  
 **database password:** root  
 
-You can edit the site files from your regular (host) filesystem in the `docroot` folder.
+You can edit the site files from your regular (host) filesystem in the `docroot` folder.  
+When you are done working and want to shut down the vm - go into the `/vagrant` folder and type  
+```
+vagrant halt
+```
+When you want to start it up again type  
+```
+vagrant up
+```  
+To totally delete the vm  
+``` vagrant destroy ```  
+
+That's it. Enjoy!  
+
 
 ## Customizing the project
 You can cahnge the hostname from `drupal8.local` to any host name you want by making the following changes:  

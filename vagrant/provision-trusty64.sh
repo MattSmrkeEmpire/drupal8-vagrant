@@ -50,4 +50,11 @@ apt-get -y autoremove > /dev/null
 echo "----- Restarting Apache..."
 service apache2 restart > /dev/null
 
+# Drupal Console
+echo "----- Installing Drupal Console..."
+curl https://drupalconsole.com/installer -L -o drupal.phar
+mv drupal.phar /usr/local/bin/drupal
+chmod +x /usr/local/bin/drupal
+drupal init --override
+
 echo "--- All Done!"

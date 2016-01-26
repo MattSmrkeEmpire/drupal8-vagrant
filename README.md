@@ -39,8 +39,10 @@ When you want to start it up again type
 ```
 vagrant up
 ```  
-To totally delete the vm  
-``` vagrant destroy ```  
+To totally remove the vm  
+```
+vagrant destroy
+```  
 
 That's it. Enjoy!  
 

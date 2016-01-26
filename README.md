@@ -46,9 +46,9 @@ vagrant destroy
 
 That's it. Enjoy!  
 
-
+****
 ## Customizing the project
-You can cahnge the hostname from `drupal8.local` to any host name you want by making the following changes:  
+You can change the hostname from `drupal8.local` to any host name you want by making the following changes:  
 In `vagrant/hostfile`:  
 ```
 ServerName  your_host.whatever

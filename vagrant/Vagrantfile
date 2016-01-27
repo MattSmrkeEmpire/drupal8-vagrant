@@ -10,7 +10,7 @@ Vagrant.configure("2") do |o|
 
   o.vm.synced_folder "../docroot/", "/var/www/docroot", create:true, owner: "vagrant", group: "www-data"
 
-  if defined?(config_json["vm"]["hostname"]) and Vagrant.has_plugin?("vagrant-hostsupdater")
+  if defined? config_json["vm"]["hostname"] and Vagrant.has_plugin? "vagrant-hostsupdater"
     o.vm.hostname = config_json["vm"]["hostname"]
   end
 end

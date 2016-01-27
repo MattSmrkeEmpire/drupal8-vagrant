@@ -1,5 +1,9 @@
 {
   "vm": {
-    "hostname": "drupal8"
+    "hostname": "drupal8.local"
+  },
+  "db": {
+    "name": "drupal8db",
+    "root_password": "root"
   }
 }

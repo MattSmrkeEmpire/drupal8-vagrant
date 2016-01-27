@@ -20,34 +20,19 @@ a2enmod rewrite > /dev/null
 a2dissite 000-default.conf > /dev/null
 
 
-echo "Installing PHP extensions"
+echo "Installing PHP extensions and utils"
 apt-get install curl php5-curl php5-gd php5-mcrypt php5-mysql -y  > /dev/null
-
-
-echo "Installing MySQL"
 apt-get install debconf-utils -y > /dev/null
-debconf-set-selections <<< "mysql-server mysql-server/root_password password root"
-debconf-set-selections <<< "mysql-server mysql-server/root_password_again password root"
-apt-get install mysql-server -y > /dev/null
 
-
-mysql -uroot -proot -e "CREATE DATABASE IF NOT EXISTS drupal8"
-
-
-# Apache / Virtual Host Setup
-rm /etc/apache2/envvars
-cp /vagrant/apache-envvars /etc/apache2/envvars
-echo "----- Provision: Install Host File..."
-cp /vagrant/hostfile /etc/apache2/sites-available/drupal8.conf
-a2ensite drupal8.conf > /dev/null
-
-rm -rf /var/www/html
 
 # Cleanup
 apt-get -y autoremove > /dev/null
 
-# Restart Apache
-echo "----- Restarting Apache..."
+# Set up Apache
+echo "----- Finishing Apache setup ..."
+rm -rf /var/www/html
+rm /etc/apache2/envvars
+cp /vagrant/apache-envvars /etc/apache2/envvars
 service apache2 restart > /dev/null
 
 # Drupal Console
@@ -57,4 +42,12 @@ mv drupal.phar /usr/local/bin/drupal
 chmod +x /usr/local/bin/drupal
 drupal init --override
 
+
 echo "--- All Done!"
+
+
+
+
+
+
+

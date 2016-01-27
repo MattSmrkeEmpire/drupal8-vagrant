@@ -1,16 +1,41 @@
 Vagrant.configure("2") do |o|
-  # Load config JSON.
+  # LOAD CONFIG
+  # ===========
   config_json = JSON.parse(File.read("config.json"))
+  @db_name = config_json["db"]["name"]
+  @db_pass = config_json["db"]["root_password"]
 
   o.vm.box = "ubuntu/trusty64"
-  
   o.vm.network :private_network, ip: "192.168.44.44"
 
-  o.vm.provision :shell, :path => "./provision-trusty64.sh"
-
+  # SYNC FOLDER
+  # ===========
   o.vm.synced_folder "../docroot/", "/var/www/docroot", create:true, owner: "vagrant", group: "www-data"
 
-  if defined? config_json["vm"]["hostname"] and Vagrant.has_plugin? "vagrant-hostsupdater"
-    o.vm.hostname = config_json["vm"]["hostname"]
+
+
+  # PROVISIONING
+  # ============
+  o.vm.provision :shell, :path => "./provision-trusty64.sh"
+  o.vm.provision :shell,
+    inline: "debconf-set-selections <<< \"mysql-server mysql-server/root_password password #{@db_pass}\""
+
+  o.vm.provision :shell,
+    inline: "debconf-set-selections <<< \"mysql-server mysql-server/root_password_again password #{@db_pass}\""
+
+  o.vm.provision :shell, inline: "apt-get install mysql-server -y > /dev/null"
+  o.vm.provision :shell, inline: "mysql -uroot -proot -e \"CREATE DATABASE IF NOT EXISTS #{@db_name}\""
+
+  if defined? config_json["vm"]["hostname"]
+    @hostname = config_json["vm"]["hostname"]
+    hostfile = File.read('hostfile')
+    hostfile = hostfile.gsub /drupal8\.local/, @hostname
+    o.vm.provision :shell, inline: "echo \"#{hostfile}\" >> /etc/apache2/sites-available/#{@hostname}.conf"
+    o.vm.provision :shell, inline: "a2ensite #{@hostname}.conf"
+    o.vm.provision :shell, inline: "service apache2 restart"
+
+    if Vagrant.has_plugin? "vagrant-hostsupdater"
+      o.vm.hostname = @hostname
+    end
   end
 end

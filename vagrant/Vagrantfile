@@ -24,7 +24,7 @@ Vagrant.configure("2") do |o|
     inline: "debconf-set-selections <<< \"mysql-server mysql-server/root_password_again password #{@db_pass}\""
 
   o.vm.provision :shell, inline: "apt-get install mysql-server -y > /dev/null"
-  o.vm.provision :shell, inline: "mysql -uroot -proot -e \"CREATE DATABASE IF NOT EXISTS #{@db_name}\""
+  o.vm.provision :shell, inline: "mysql -uroot -p#{@db_pass} -e \"CREATE DATABASE IF NOT EXISTS #{@db_name}\""
 
   if defined? config_json["vm"]["hostname"]
     @hostname = config_json["vm"]["hostname"]

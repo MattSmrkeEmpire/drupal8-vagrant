@@ -1,0 +1,7 @@
+<?php
+
+$aliases['vagrant'] = array(
+  'root' => '/var/www/docroot',
+  'remote-host' => 'drupal8.local',
+  'remote-user' => 'vagrant',
+);

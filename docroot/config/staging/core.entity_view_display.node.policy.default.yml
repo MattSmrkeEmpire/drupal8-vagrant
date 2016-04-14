@@ -1,0 +1,32 @@
+uuid: 2bb7daf3-3c20-42bd-b524-40f39023ea96
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.policy.body
+    - field.field.node.policy.field_policy_number
+    - node.type.policy
+  module:
+    - text
+    - user
+id: node.policy.default
+targetEntityType: node
+bundle: policy
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+  field_policy_number:
+    weight: 102
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  links:
+    weight: 100
+hidden: {  }

@@ -9,11 +9,11 @@ sudo ln -sf /usr/share/zoneinfo/America/Toronto /etc/localtime
 # Install Apache, PHP
 echo "Updating repositories"
 sudo apt-get install software-properties-common python-software-properties build-essential -y > /dev/null
-sudo add-apt-repository ppa:ondrej/php5 -y > /dev/null
+sudo add-apt-repository ppa:ondrej/php -y > /dev/null
 sudo apt-get update > /dev/null
 
 echo "----- Installing Apache, PHP and MySQL"
-sudo apt-get install apache2 php5 libapache2-mod-php5 -y > /dev/null
+sudo apt-get install apache2 php5.6 libapache2-mod-php5.6 -y > /dev/null
 sudo echo "ServerName localhost" > "/etc/apache2/conf-available/fqdn.conf"
 sudo a2enconf fqdn > /dev/null
 sudo a2enmod rewrite > /dev/null
@@ -21,7 +21,7 @@ sudo a2dissite 000-default.conf > /dev/null
 
 
 echo "Installing PHP extensions and utils"
-sudo apt-get install curl php5-curl php5-gd php5-mcrypt php5-mysql -y  > /dev/null
+sudo apt-get install curl php5.6-curl php5.6-gd php5.6-mcrypt php5.6-mysql php5.6-dom -y  > /dev/null
 sudo apt-get install debconf-utils -y > /dev/null
 
 

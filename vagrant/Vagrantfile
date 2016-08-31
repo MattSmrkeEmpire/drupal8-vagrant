@@ -5,7 +5,7 @@ Vagrant.configure("2") do |o|
   @db_name = config_json["db"]["name"]
   @db_pass = config_json["db"]["root_password"]
 
-  o.vm.box = "ubuntu/trusty64"
+  o.vm.box = "geerlingguy/ubuntu1604"
   o.vm.network :private_network, ip: "192.168.44.44"
 
   # SYNC FOLDER
